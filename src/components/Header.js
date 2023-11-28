@@ -7,13 +7,13 @@ const Header = () => {
       <nav>
         <ul>
           <li>
-            <Link path="/login">LOGIN.</Link>
+            <Link to="/">LOGIN.</Link>
           </li>
           <li>
-            <Link path="/friends">FRIENDLIST.</Link>
+            <Link to="/friends">FRIENDLIST.</Link>
           </li>
           <li>
-            <Link path="/friends/add">ADDFRIEND.</Link>
+            <Link to="/friends/add">ADDFRIEND.</Link>
           </li>
           <li>LOGOUT</li>
         </ul>
