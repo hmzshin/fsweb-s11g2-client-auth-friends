@@ -2,7 +2,7 @@ import { createContext, useReducer } from "react";
 
 export const UserContextObject = createContext();
 const initialData = {
-  userName: "",
+  username: "",
   password: "",
 };
 
@@ -10,7 +10,7 @@ const userReducer = (state, action) => {
   switch (action.type) {
     case "login":
       const object = {
-        userName: action.payload.userName,
+        username: action.payload.username,
         password: action.payload.password,
       };
       return object;

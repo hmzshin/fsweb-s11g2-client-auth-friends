@@ -2,8 +2,11 @@ import React, { useContext, useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { UserContextObject } from "../context/UserContext";
 import "./Login.css";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
 const Login = () => {
   const { user, dispatchUser } = useContext(UserContextObject);
+  const history = useHistory();
 
   const {
     register,
@@ -20,7 +23,29 @@ const Login = () => {
     console.log("form data > ", formData);
     console.log("user data > ", user);
 
-    dispatchUser({ type: "login", payload: formData });
+    axios
+      .post("http://localhost:9000/api/login", {
+        username: "workintech",
+        password: "wecandoit",
+      })
+      .then(function (response) {
+        console.log("bu iş oldu", response.data);
+        localStorage.setItem("token", response.data.token);
+        setTimeout(() => {
+          history.push("/friends");
+        }, 1000);
+
+        dispatchUser({
+          type: "login",
+          payload: {
+            username: "workintech",
+            password: "wecandoit",
+          },
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
   useEffect(() => {
     console.log(user);
@@ -34,7 +59,7 @@ const Login = () => {
           USERNAME
           <input
             type="text"
-            {...register("userName", {
+            {...register("username", {
               required: true,
               minLength: { value: 3, message: "en az üç karekter olmalı" },
             })}
