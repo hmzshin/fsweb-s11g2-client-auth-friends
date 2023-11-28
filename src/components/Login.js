@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { UserContextObject } from "../context/UserContext";
 const Login = () => {
-  const [formData, setFormData] = useState({
-    userName: "",
-    password: "",
-  });
+  const { user, dispatchUser } = useContext(UserContextObject);
 
   const {
     register,
@@ -12,15 +10,20 @@ const Login = () => {
     formState: { errors, isValid },
   } = useForm({
     defaultValues: {
-      ...formData,
+      ...user,
     },
     mode: "onChange",
   });
 
   function onSubmitHandler(formData) {
     console.log("form data > ", formData);
-    setFormData(formData);
+    console.log("user data > ", user);
+
+    dispatchUser({ type: "login", payload: formData });
   }
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
 
   return (
     <form onSubmit={handleSubmit(onSubmitHandler)}>
