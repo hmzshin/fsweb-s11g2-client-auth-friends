@@ -1,10 +1,11 @@
-import './App.css';
+import "./App.css";
+import LoginPage from "./pages/LoginPage";
 
 function App() {
   return (
-    <div className="App">
-      <h1>Client Auth Projesi: Friends</h1>
-    </div>
+    <>
+      <LoginPage />
+    </>
   );
 }
 
