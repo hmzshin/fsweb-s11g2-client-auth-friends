@@ -2,9 +2,40 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import "./Header.css";
 import { UserContextObject } from "../context/UserContext";
+import axios from "axios";
 
 const Header = () => {
-  const { user } = useContext(UserContextObject);
+  const { user, dispatchUser } = useContext(UserContextObject);
+  function logout() {
+    const token = localStorage.getItem("token");
+    axios
+      .post(
+        "http://localhost:9000/api/logout",
+        {
+          username: "workintech",
+          password: "wecandoit",
+        },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      )
+      .then(function (response) {
+        console.log("logout", response);
+        localStorage.clear("token");
+        dispatchUser({
+          type: "logout",
+          payload: {
+            username: "",
+            password: "",
+          },
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
   return (
     <>
       <header id="page-header">
@@ -24,7 +55,7 @@ const Header = () => {
             <li>
               <Link to="/friends/add">ADDFRIEND.</Link>
             </li>
-            <li>
+            <li onClick={logout}>
               <p>LOGOUT</p>
             </li>
           </ul>

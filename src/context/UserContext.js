@@ -9,15 +9,19 @@ const initialData = {
 const userReducer = (state, action) => {
   switch (action.type) {
     case "login":
-      const object = {
+      const login = {
         username: action.payload.username,
         password: action.payload.password,
       };
-      return object;
+      return login;
       break;
 
     case "logout":
-      return state.filter((s) => s.id !== action.payload);
+      const logout = {
+        username: action.payload.username,
+        password: action.payload.password,
+      };
+      return logout;
       break;
 
     default:
