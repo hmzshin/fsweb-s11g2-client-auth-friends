@@ -7,6 +7,7 @@ import { useHistory } from "react-router-dom";
 const Login = () => {
   const { user, dispatchUser } = useContext(UserContextObject);
   const history = useHistory();
+  const token = localStorage.getItem("token");
 
   const {
     register,
@@ -48,8 +49,25 @@ const Login = () => {
       });
   }
   useEffect(() => {
-    console.log(user);
-  }, [user]);
+    token &&
+      axios
+        .get("http://localhost:9000/api/friends", {
+          headers: { Authorization: token },
+        })
+        .then(function (response) {
+          console.log("neden");
+          dispatchUser({
+            type: "login",
+            payload: {
+              username: "workintech",
+              password: "wecandoit",
+            },
+          });
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+  }, []);
 
   return (
     <section id="user-login">

@@ -2,12 +2,17 @@ import LoginPage from "./LoginPage";
 import FriendsPage from "./FriendsPage";
 import { Route, Switch } from "react-router-dom";
 import ProtectedPage from "./ProtectedPage";
+import AddFriendPage from "./AddFriendPage";
 
 const Main = () => {
   return (
     <div>
       <Switch>
-        <Route path="/friends/add" exact></Route>
+        <Route path="/friends/add" exact>
+          <ProtectedPage>
+            <AddFriendPage />
+          </ProtectedPage>
+        </Route>
 
         <Route path="/friends" exact>
           <ProtectedPage>

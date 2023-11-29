@@ -8,7 +8,7 @@ const friendReducer = (state = [], action) => {
       return [...action.payload];
       break;
     case "add_friend":
-      return [...state, ...action.payload];
+      return [...action.payload];
       break;
 
     case "delete_friend":
