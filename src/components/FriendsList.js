@@ -16,7 +16,7 @@ const FriendList = () => {
       })
       .then(function (response) {
         dispatchFriends({ type: "set_friend", payload: response.data });
-        console.log("bu iş oldu ******", response.data);
+        console.log("logedin oldu ******", response.data);
       })
       .catch(function (error) {
         console.log(error);

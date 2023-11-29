@@ -1,6 +1,7 @@
 import LoginPage from "./LoginPage";
 import FriendsPage from "./FriendsPage";
 import { Route, Switch } from "react-router-dom";
+import ProtectedPage from "./ProtectedPage";
 
 const Main = () => {
   return (
@@ -9,7 +10,9 @@ const Main = () => {
         <Route path="/friends/add" exact></Route>
 
         <Route path="/friends" exact>
-          <FriendsPage />
+          <ProtectedPage>
+            <FriendsPage />
+          </ProtectedPage>
         </Route>
 
         <Route path="/" exact>
