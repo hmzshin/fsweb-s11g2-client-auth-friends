@@ -2,10 +2,13 @@ import { createContext, useReducer } from "react";
 
 export const FriendsContextObject = createContext();
 
-const friendReducer = (state, action) => {
+const friendReducer = (state = [], action) => {
   switch (action.type) {
+    case "set_friend":
+      return [...action.payload];
+      break;
     case "add_friend":
-      return [...state, action.payload];
+      return [...state, ...action.payload];
       break;
 
     case "delete_friend":
